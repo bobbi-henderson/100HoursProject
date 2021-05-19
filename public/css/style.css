@@ -3,6 +3,10 @@ body {
     text-align: center;
 }
 
+.form-group {
+    text-align: start;
+}
+
 .logo {
-    height: 50px;
+    height: auto;
 }
