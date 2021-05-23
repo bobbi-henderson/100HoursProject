@@ -6,6 +6,8 @@
     <title>100 Hours Project</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://kit.fontawesome.com/6bab3c972e.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 pb-0 pt-0">
@@ -24,9 +26,6 @@
             </li>
             <% if(isLoggedIn){%>
               <li class="nav-item">
-                <a href="/profile" class="nav-link">Welcome, <%=user.first%></a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
               </li>
             <%} else {%>
@@ -37,8 +36,6 @@
                 <a class="nav-link" href="/signup">Sign Up</a>
               </li>
             <%}%>
-
-
           </ul>
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search">
@@ -46,7 +43,26 @@
           </form>
         </div>
     </nav>
-    <h1>Welcome to <br> Meet Community</h1>
+    <h1>Welcome back, <%= user.first %></h1>
+    <a href="/events/newEvent" class="btn btn-primary">New Event <i class="fas fa-plus"></i></a>
+
+    <h2>You're Events</h2>
+    <div class="container">
+      <% for(let i=0; i<userEvents.length; i++){ %>
+        <div class="col-4">
+          <h3><%=userEvents[i].name%></h3>
+          <img src="<%= userEvents[i].image %>" alt="Event Photo" class="img-fluid rounded">
+          <form action="/events/event/<%= userEvents[i]._id%>">
+            <button class="btn btn-primary btn-sm mt-3" >See More</button>
+          </form>
+        </div>
+      <%}%>
+    </div>
+
+
+    <h2>Attending</h2>
+
+    <h2>Invited</h2>
     
     <script src="js/index.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

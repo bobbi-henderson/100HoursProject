@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>100 Hours Project</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 pb-0 pt-0">
-        <a class="navbar-brand" href="/"><img src="images/meetcomm.png" class="logo"></a>
+        <a class="navbar-brand" href="/"><img src="../images/meetcomm.png" class="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -46,7 +46,44 @@
           </form>
         </div>
     </nav>
-    <h1>Welcome to <br> Meet Community</h1>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <h1 class="">Start a New Event</h1>
+                <form action="/events/newEvent" enctype="multipart/form-data" method="POST">
+                    <div class="form-group">
+                        <label for="name">Event Name</label>
+                        <input type="text" name="name" id="name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Event Image</label>
+                        <input type="file" name="file" id="image" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="desc">Event Description</label>
+                        <textarea name="desc" id="desc" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Event Date</label>
+                        <input type="datetime-local" name="date" id="date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Event Location</label>
+                        <input type="text" name="location" id="location" class="form-control">
+                    </div>
+                    <label for="check" class="pr-2">Is this event is open to the public?</label>
+                    <div class="form-check form-check-inline" id="check">
+                        <input type="checkbox" name="public" id="public" class="form-check-input">
+                        <label for="public" class="form-check-label">Yes</label>
+                    </div>
+                    <div></div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+   
     
     <script src="js/index.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
