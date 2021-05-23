@@ -44,6 +44,7 @@ app.use('/', homeRoutes)
 app.use('/', authRoutes)
 app.use('/', profileRoutes)
 app.use('/events', eventRoutes)
+app.use('/events/event', eventRoutes)
 
 app.listen(process.env.PORT || PORT, ()=>{
     console.log('Server is running, you better catch it!')

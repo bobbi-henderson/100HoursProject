@@ -54,6 +54,43 @@
         </div>
     </div>
 
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-8">
+          <form action="/events/event/postComment/<%=event._id%>?_method=PUT" method="POST">
+            <div class="form-group">
+              <label for="content">New Comment</label>
+              <textarea name="content" id="content" cols="30" rows="3" class="form-control"></textarea>
+            </div>
+            <button class="btn btn-sm btn-primary">Submit</button>
+          </form>
+        </div>
+        <div class="col-8 mt-3">
+          <%for(let i=0; i<event.comments.length; i++){%>
+            <div class="containter comment mb-2">
+              <h5><%=event.comments[i].username%></h5>
+              <p><%=event.comments[i].content%></p>
+              <span><%=event.comments[i].date.toDateString()%></span>
+
+  
+              <%let userId = event.comments[i].userId%>
+              <%let commentId = event.comments[i]._id%>
+              <%let likes = event.comments[i].likes%>
+              <form action="/events/event/addCommentLike/<%=event._id%>/<%=commentId%>?_method=PUT" method="POST" class="d-inline ml-auto">
+                <span><%=likes%></span>
+                <button class="btn btn-sm btn-danger"><i class="fas fa-heart"></i></button>
+              </form>
+              <%if(userId == user){%>
+                <form action="/events/event/deleteComment/<%=event._id%>/<%=commentId%>?_method=PUT" method="POST" class="d-inline">
+                  <button class="btn btn-sm btn-primary"><i class="fas fa-trash"></i></button>
+                </form>
+              <%}%>
+            </div>
+          <%}%>
+        </div>
+      </div>
+    </div>
+
     <script src="js/index.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

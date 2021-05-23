@@ -21,7 +21,6 @@ module.exports = {
                 location: req.body.location,
             })
             res.redirect('/profile')
-            console.log('')
         } catch (err) {
             console.log(err)
         }
@@ -30,7 +29,50 @@ module.exports = {
         try {
             const event = await Event.findById(req.params._id)
             
-            res.render('event.ejs', {event: event, isLoggedIn: req.isAuthenticated()})
+            const user = req.user._id
+
+            res.render('event.ejs', {event: event, user: user, isLoggedIn: req.isAuthenticated()})
+        } catch (err) {
+            console.log(err)
+        }
+    },
+    postComment: async (req, res) =>{
+        try {
+            await Event.findOneAndUpdate({_id: req.params._id},{
+                $push: {comments: {
+                    userId: req.user._id,
+                    username: req.user.userName,
+                    content: req.body.content
+                }}
+            })
+
+            const event = Event.findById({_id: req.params._id})
+
+
+            res.redirect('back')
+        } catch (err) {
+            console.log(err)
+        }
+    }, 
+    deleteComment: async (req, res) =>{
+        try {
+            await Event.findOneAndUpdate({_id: req.params._eventId},{
+                $pull: {comments: {
+                    _id: req.params._commentId
+                }}
+            })
+
+            res.redirect('back')
+        } catch (err) {
+            console.log(err)
+        }
+    }, 
+    addCommentLike: async (req,res)=>{
+        try {
+            await Event.updateOne({_id: req.params._eventId, 'comments._id': req.params._commentId},{
+                $inc:{'comments.$.likes': +1}})
+
+            res.redirect('back')
         } catch (err) {
             console.log(err)
         }

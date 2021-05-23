@@ -9,7 +9,13 @@ const EventSchema = new mongoose.Schema({
   invited: {type: Array, default: []},
   attendees: {type: Array, default: []},
   desc: {type: String},
-  comments: {type: Array, default: []},
+  comments: [{
+    userId: {type: String},
+    username: {type: String},
+    content: {type: String},
+    date: {type: Date, default: Date.now},
+    likes: {type: Number, default: 0}
+  }],
   date: {type: Date, default: Date.now},
   public: {type: Boolean, default: true},
   location: {type: String}
