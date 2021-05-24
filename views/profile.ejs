@@ -48,21 +48,47 @@
 
     <h2>You're Events</h2>
     <div class="container">
-      <% for(let i=0; i<userEvents.length; i++){ %>
-        <div class="col-4">
-          <h3><%=userEvents[i].name%></h3>
-          <img src="<%= userEvents[i].image %>" alt="Event Photo" class="img-fluid rounded">
-          <form action="/events/event/<%= userEvents[i]._id%>">
-            <button class="btn btn-primary btn-sm mt-3" >See More</button>
-          </form>
-        </div>
-      <%}%>
+      <div class="row">
+        <% for(let i=0;i<userEvents.length;i++){ %>
+          <% let event = userEvents[i] %>
+          <% if(event.date.getTime() >= Date.now()){ %>
+            <div class="col-4">
+              <h3><%=userEvents[i].name%></h3>
+              <img src="<%= userEvents[i].image %>" alt="Event Photo" class="img-fluid rounded">
+              <form action="/events/event/<%= userEvents[i]._id%>" class="d-inline">
+                <button class="btn btn-primary btn-sm mt-3" >See More</button>
+              </form>
+              <form action="/events/event/deleteEvent/<%=userEvents[i]._id%>?_method=DELETE" method="POST" class='d-inline'>
+                <button class="btn btn-sm btn-danger mt-3">Delete Event</button>
+              </form>
+            </div>
+          <%}%>
+        <%}%>
+      </div>
     </div>
 
 
-    <h2>Attending</h2>
+    <h2 class="d-block">Attending</h2>
 
-    <h2>Invited</h2>
+    <h2 class="d-block">Invited</h2>
+
+    <h2 class="d-block">Past Events</h2>
+    <div class="container">
+      <div class="row">
+        <% for(let i=0;i<userEvents.length;i++){ %>
+          <% let event = userEvents[i] %>
+          <% if(event.date.getTime() < Date.now()){ %>
+            <div class="col-4">
+              <h3><%=userEvents[i].name%></h3>
+              <img src="<%= userEvents[i].image %>" alt="Event Photo" class="img-fluid rounded">
+              <form action="/events/event/<%= userEvents[i]._id%>" class="d-inline">
+                <button class="btn btn-primary btn-sm mt-3" >See More</button>
+              </form>
+            </div>
+          <%}%>
+        <%}%>
+      </div>
+    </div>
     
     <script src="js/index.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

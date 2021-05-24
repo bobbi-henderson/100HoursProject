@@ -36,6 +36,17 @@ module.exports = {
             console.log(err)
         }
     },
+    deleteEvent: async (req, res) =>{
+        try {
+            const event = await Event.findById({_id: req.params._id})
+            await cloudinary.uploader.destroy(event.cloudinaryID)
+            await Event.deleteOne({_id: req.params._id})
+
+            res.redirect('back')
+        } catch (err) {
+            console.log(err)
+        }
+    },
     postComment: async (req, res) =>{
         try {
             await Event.findOneAndUpdate({_id: req.params._id},{
