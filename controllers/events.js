@@ -29,7 +29,7 @@ module.exports = {
         try {
             const event = await Event.findById(req.params._id)
             
-            const user = req.user._id
+            const user = req.user
 
             res.render('event.ejs', {event: event, user: user, isLoggedIn: req.isAuthenticated()})
         } catch (err) {
@@ -41,6 +41,63 @@ module.exports = {
             const event = await Event.findById({_id: req.params._id})
             await cloudinary.uploader.destroy(event.cloudinaryID)
             await Event.deleteOne({_id: req.params._id})
+
+            res.redirect('back')
+        } catch (err) {
+            console.log(err)
+        }
+    },
+    changeDate: async (req,res) =>{
+        try {
+            await Event.findOneAndUpdate({_id: req.params._id}, {
+                $set: {
+                    date: req.body.date
+                }
+            })
+            res.redirect('back')
+        } catch (err) {
+            console.log(err)
+        }
+    },
+    sendInvites: async (req, res) =>{
+        try {
+            const newInvites = (req.body.invites).split(',').filter((email)=>{return email.match(/\S+@\S+\.\S+/g)}).map((email)=>{return email.trim()})
+            console.log(newInvites)
+            
+            await Event.findOneAndUpdate({_id: req.params._id}, {
+                $addToSet: {
+                    invited: newInvites
+                }
+            })
+
+            res.redirect('back')
+        } catch (err) {
+            console.log(err)
+        }
+    },
+    acceptInvite: async (req, res) =>{
+        try {
+            await Event.findOneAndUpdate({_id: req.params._id}, {
+                $pull: {
+                    invited: req.user.email
+                }, 
+                $addToSet: {
+                    attendees: req.user.email
+                }
+            })
+
+            res.redirect('back')
+        } catch (err) {
+            console.log(err)
+        }
+    },
+    declineInvite: async (req, res) =>{
+        try {
+            await Event.findOneAndUpdate({_id: req.params._id}, {
+                $pull: {
+                    invited: req.user.email
+                }
+            })
 
             res.redirect('back')
         } catch (err) {

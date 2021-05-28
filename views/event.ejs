@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="#">Resources</a>
+              <a class="nav-link" href="/profile">Profile</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">About</a>
@@ -47,9 +47,36 @@
     <div class="container ">
         <div class="row justify-content-center">
             <div class="col-8">
+                <% if(event.invited.includes(user.email)){%>
+                  <p>Hello, <%=user.first%>! You have been invited to this event!</p>
+                  <form action="/events/event/acceptInvite/<%=event._id%>?_method=PUT" method="POST" class="d-inline">
+                    <button class="btn btn-success btn-sm">Accept Invite</button>
+                  </form>
+                  <form action="/events/event/declineInvite/<%=event._id%>?_method=PUT" method="POST" class="d-inline">
+                    <button class="btn btn-danger btn-sm">Decline Invite</button>
+                  </form>
+                <%}%>
                 <h3><%=event.name%></h3>
                 <img src="<%= event.image %>" alt="Event Photo" class="img-fluid rounded">
                 <p><%= event.desc %></p>
+                <p><%= event.date %></p>
+                <p><%= event.attendees.length%> people are attending</p>
+                <p><%= event.invited.length %> people are invited</p>
+                <% if(user._id = event.hostId) {%>
+                  <form action="/events/event/changeDate/<%=event._id%>?_method=PUT" method="POST">
+                    <label for="date">Change Date</label>
+                    <input type="datetime-local" name="date" id="date">
+                    <button class="btn btn-sm btn-primary">Submit</button>
+                  </form>
+
+                  <form action="/events/event/sendInvite/<%=event._id%>?_method=PUT" method="post">
+                    <div class="form-group">
+                      <label for="invites">Enter Email(s) <span class="">separate multiple emails with a comma (,)</span></label>
+                      <textarea name="invites" id="" cols="30" rows="2" class="form-control"></textarea>
+                    </div>
+                   <button class="btn btn-sm btn-primary" class="form-control">Submit</button>
+                  </form>
+                <%}%>
               </div>
         </div>
     </div>
@@ -80,7 +107,7 @@
                 <span><%=likes%></span>
                 <button class="btn btn-sm btn-danger"><i class="fas fa-heart"></i></button>
               </form>
-              <%if(userId == user){%>
+              <%if(userId == user._id){%>
                 <form action="/events/event/deleteComment/<%=event._id%>/<%=commentId%>?_method=PUT" method="POST" class="d-inline">
                   <button class="btn btn-sm btn-primary"><i class="fas fa-trash"></i></button>
                 </form>
@@ -91,7 +118,7 @@
       </div>
     </div>
 
-    <script src="js/index.js"></script>
+    <script src="../../js/index.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

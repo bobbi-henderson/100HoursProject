@@ -11,5 +11,9 @@ router.delete('/event/deleteEvent/:_id', eventsController.deleteEvent)
 router.put('/event/postComment/:_id', eventsController.postComment)
 router.put('/event/deleteComment/:_eventId/:_commentId', eventsController.deleteComment)
 router.put('/event/addCommentLike/:_eventId/:_commentId', eventsController.addCommentLike)
+router.put('/event/changeDate/:_id', eventsController.changeDate)
+router.put('/event/sendInvite/:_id', eventsController.sendInvites)
+router.put('/event/acceptInvite/:_id', eventsController.acceptInvite)
+router.put('/event/declineInvite/:_id', eventsController.declineInvite)
 
 module.exports = router
