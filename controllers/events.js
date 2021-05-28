@@ -1,5 +1,6 @@
 const Event = require('../models/Event')
 const cloudinary = require('../middleware/cloudinary')
+const mailer = require('../middleware/nodeMailer')
 
 module.exports = {
     getNewEvent: (req,res)=>{
@@ -61,8 +62,19 @@ module.exports = {
     },
     sendInvites: async (req, res) =>{
         try {
-            const newInvites = (req.body.invites).split(',').filter((email)=>{return email.match(/\S+@\S+\.\S+/g)}).map((email)=>{return email.trim()})
+            const event = await Event.findById({_id: req.params._id})
+
+            const newInvites = (req.body.invites).split(',').filter((email)=>{return email.match(/\S+@\S+\.\S+/g)}).map((email)=>{return email.toLowerCase().trim()}).filter((x)=>{return !event.attendees.includes(x)})
+            
             console.log(newInvites)
+            const info = await mailer.sendMail({
+                from: req.user.email,
+                to: newInvites.join(', '),
+                subject: `You have been invited to attend ${event.name}`,
+                html: `<h3>${req.user.first} ${req.user.last} has invited you to attend ${event.name}.</h3>
+                        <img src="${event.image}" alt="Event Photo" width="600" height="400">
+                        <p>Login or Sign up at <a href="http://localhost:2121/">Meet Community</a> to see the event details and respond ot this invitiation.</p>`
+            })
             
             await Event.findOneAndUpdate({_id: req.params._id}, {
                 $addToSet: {
