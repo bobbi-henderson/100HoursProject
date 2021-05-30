@@ -20,6 +20,12 @@ module.exports = {
                 date: req.body.date,
                 public: (req.body.public === 'on'),
                 location: req.body.location,
+                address: {
+                    address: req.body.addres,
+                    city: req.body.city,
+                    state: req.body.state,
+                    zip: req.body.zip
+                  }
             })
             res.redirect('/profile')
         } catch (err) {
@@ -55,6 +61,24 @@ module.exports = {
                     date: req.body.date
                 }
             })
+            res.redirect('back')
+        } catch (err) {
+            console.log(err)
+        }
+    },
+    updateAddress: async (req, res) =>{
+        try {
+            await Event.findOneAndUpdate({_id: req.params._id}, {
+                $set: {
+                    address: {
+                        address: req.body.address,
+                        city: req.body.city,
+                        state: req.body.state,
+                        zip: req.body.zip
+                    } 
+                }
+            })
+
             res.redirect('back')
         } catch (err) {
             console.log(err)

@@ -1,5 +1,9 @@
+const Event = require('../models/Event')
+
 module.exports = {
-    getIndex: (req,res)=>{
-        res.render('index.ejs', {user: req.user, isLoggedIn: req.isAuthenticated()})
+    getIndex: async (req,res)=>{
+        const events = await Event.find({public: true}).sort({attendees: -1})
+        console.log(events)
+        res.render('index.ejs', {events: events, user: req.user, isLoggedIn: req.isAuthenticated()})
     }
 }

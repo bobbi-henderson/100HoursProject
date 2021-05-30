@@ -18,7 +18,13 @@ const EventSchema = new mongoose.Schema({
   }],
   date: {type: Date, default: Date.now},
   public: {type: Boolean, default: true},
-  location: {type: String}
+  location: {type: String},
+  address: {
+    address: {type: String},
+    city: {type: String},
+    state: {type: String},
+    zip: {type: String}
+  }
 })
 
 module.exports = mongoose.model('Event', EventSchema)

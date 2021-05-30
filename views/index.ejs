@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="pb-5">
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 pb-0 pt-0">
         <a class="navbar-brand" href="/"><img src="images/meetcomm.png" class="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,14 +17,11 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="#">Resources</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="#">About</a>
             </li>
             <% if(isLoggedIn){%>
               <li class="nav-item">
-                <a href="/profile" class="nav-link">Welcome, <%=user.first%></a>
+                <a href="/profile" class="nav-link">Profile</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
@@ -37,8 +34,6 @@
                 <a class="nav-link" href="/signup">Sign Up</a>
               </li>
             <%}%>
-
-
           </ul>
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search">
@@ -46,7 +41,23 @@
           </form>
         </div>
     </nav>
-    <h1>Welcome to <br> Meet Community</h1>
+    
+    <img src="images/meetcommlarge.png" alt="">
+    <h1>The place where people come together.</h1>
+
+    <h2>Popular Upcoming Events</h2>
+
+    <% for(let i=0;i<events.length;i++){ %>
+      <% if(events[i].date.getTime() >= Date.now()){ %>
+        <div class="col-4">
+          <h3><%=events[i].name%></h3>
+          <img src="<%= events[i].image %>" alt="Event Photo" class="img-fluid rounded">
+          <form action="/events/event/<%=events[i]._id%>" class="d-inline">
+            <button class="btn btn-primary btn-sm mt-3" >See More</button>
+          </form>
+        </div>
+      <%}%>
+    <%}%>
     
     <script src="js/index.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

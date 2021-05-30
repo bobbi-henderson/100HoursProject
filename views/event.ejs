@@ -9,7 +9,7 @@
 
     <script src="https://kit.fontawesome.com/6bab3c972e.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="pb-5">
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 pb-0 pt-0">
         <a class="navbar-brand" href="/"><img src="../../images/meetcomm.png" class="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,9 +44,9 @@
         </div>
     </nav>
 
-    <div class="container ">
+    <div class="container">
         <div class="row justify-content-center">
-            <div class="col-8">
+            <div class="col-6">
                 <% if(event.invited.includes(user.email)){%>
                   <p>Hello, <%=user.first%>! You have been invited to this event!</p>
                   <form action="/events/event/acceptInvite/<%=event._id%>?_method=PUT" method="POST" class="d-inline">
@@ -60,22 +60,51 @@
                 <img src="<%= event.image %>" alt="Event Photo" class="img-fluid rounded">
                 <p><%= event.desc %></p>
                 <p><%= event.date %></p>
+                <% let address = event.address %>
+                <p>
+                  <a href="https://www.google.com/maps/search/?api=1&query=<%=address.address.split(' ').join('%20')%>%2C%20<%=address.city.split(' ').join('%20')%>%2C%20<%=address.state%>%2C%20<%=address.zip%>" target="_blank" rel="nonreferrer noopener">
+                    <%=address.address%>, <%= address.city %> <%= address.state %> <%=address.zip%>
+                  </a>
+                </p>
                 <p><%= event.attendees.length%> people are attending</p>
                 <p><%= event.invited.length %> people are invited</p>
                 <% if(user._id = event.hostId) {%>
-                  <form action="/events/event/changeDate/<%=event._id%>?_method=PUT" method="POST">
-                    <label for="date">Change Date</label>
-                    <input type="datetime-local" name="date" id="date">
-                    <button class="btn btn-sm btn-primary">Submit</button>
-                  </form>
-
-                  <form action="/events/event/sendInvite/<%=event._id%>?_method=PUT" method="post">
-                    <div class="form-group">
-                      <label for="invites">Enter Email(s) <span class="">separate multiple emails with a comma (,)</span></label>
-                      <textarea name="invites" id="" cols="30" rows="2" class="form-control"></textarea>
-                    </div>
-                   <button class="btn btn-sm btn-primary" class="form-control">Submit</button>
-                  </form>
+                  <div class="container">
+                    <form action="/events/event/changeDate/<%=event._id%>?_method=PUT" method="POST">
+                      <label for="date">Change Date</label>
+                      <input type="datetime-local" name="date" id="date">
+                      <button class="btn btn-sm btn-primary">Submit</button>
+                    </form>
+  
+                    <form action="/events/event/updateAddress/<%=event._id%>?_method=PUT" method="POST">
+                      <div class="form-group">
+                        <label for="address">Address</label> 
+                        <input type="text" name="address" id="address" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" name="city" id="city" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" name="state" id="state" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="zip">Zip Code</label>
+                        <input type="text" name="zip" id="zip" class="form-control">
+                      </div> 
+                      <button class="btn btn-sm btn-primary">Submit</button>
+                    </form>
+              
+  
+                    <form action="/events/event/sendInvite/<%=event._id%>?_method=PUT" method="post">
+                      <div class="form-group">
+                        <label for="invites">Enter Email(s) <span class="">separate multiple emails with a comma (,)</span></label>
+                        <textarea name="invites" id="" cols="30" rows="2" class="form-control"></textarea>
+                      </div>
+                     <button class="btn btn-sm btn-primary" class="form-control">Submit</button>
+                    </form>
+                  </div>
                 <%}%>
               </div>
         </div>
@@ -107,6 +136,7 @@
                 <span><%=likes%></span>
                 <button class="btn btn-sm btn-danger"><i class="fas fa-heart"></i></button>
               </form>
+              
               <%if(userId == user._id){%>
                 <form action="/events/event/deleteComment/<%=event._id%>/<%=commentId%>?_method=PUT" method="POST" class="d-inline">
                   <button class="btn btn-sm btn-primary"><i class="fas fa-trash"></i></button>
