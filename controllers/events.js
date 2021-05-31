@@ -21,7 +21,7 @@ module.exports = {
                 public: (req.body.public === 'on'),
                 location: req.body.location,
                 address: {
-                    address: req.body.addres,
+                    address: req.body.address,
                     city: req.body.city,
                     state: req.body.state,
                     zip: req.body.zip
