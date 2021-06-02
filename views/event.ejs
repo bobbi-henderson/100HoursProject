@@ -59,7 +59,7 @@
                 <h3><%=event.name%></h3>
                 <img src="<%= event.image %>" alt="Event Photo" class="img-fluid rounded">
                 <p><%= event.desc %></p>
-                <p><%= event.date %></p>
+                <p><%=event.date.toLocaleDateString(undefined, {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })%> at <%=event.date.toLocaleTimeString()%></p>
                 <% let address = event.address %>
                 <p>
                   <a href="https://www.google.com/maps/search/?api=1&query=<%=address.address.split(' ').join('%20')%>%2C%20<%=address.city.split(' ').join('%20')%>%2C%20<%=address.state%>%2C%20<%=address.zip%>" target="_blank" rel="nonreferrer noopener">
