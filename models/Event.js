@@ -7,6 +7,7 @@ const EventSchema = new mongoose.Schema({
   image: {type: String},
   cloudinaryID: {type: String},
   invited: {type: Array, default: []},
+  maybe: {type: Array, default: []},
   attendees: {type: Array, default: []},
   desc: {type: String},
   comments: [{

@@ -117,6 +117,9 @@ module.exports = {
                 $pull: {
                     invited: req.user.email
                 }, 
+                $pull: {
+                    maybe: req.user.email
+                },
                 $addToSet: {
                     attendees: req.user.email
                 }
@@ -136,6 +139,41 @@ module.exports = {
             })
 
             res.redirect('back')
+        } catch (err) {
+            console.log(err)
+        }
+    },
+    cancelAttendance: async (req,res) =>{
+        try {
+            await Event.findOneAndUpdate({_id: req.params._id}, {
+                $pull: {
+                    attendees: req.user.email
+                },
+                $pull: {
+                    maybe: req.user.email
+                }
+            })
+            
+            res.redirect('back')
+        } catch (err) {
+            console.log(err)
+        }
+    },
+    maybeInvite: async (req,res) =>{
+        try {
+            await Event.findOneAndUpdate({_id: req.params._id}, {
+                $pull: {
+                    invited: req.user.email
+                }, 
+                $pull: {
+                    attendees: req.user.email
+                },
+                $addToSet: {
+                    maybe: req.user.email
+                }
+            })
+
+           res.redirect('back')
         } catch (err) {
             console.log(err)
         }

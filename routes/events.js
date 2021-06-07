@@ -16,5 +16,7 @@ router.put('/event/updateAddress/:_id', eventsController.updateAddress)
 router.put('/event/sendInvite/:_id', eventsController.sendInvites)
 router.put('/event/acceptInvite/:_id', eventsController.acceptInvite)
 router.put('/event/declineInvite/:_id', eventsController.declineInvite)
+router.put('/event/cancelAttendance/:_id', eventsController.cancelAttendance)
+router.put('/event/maybeInvite/:_id', eventsController.maybeInvite)
 
 module.exports = router

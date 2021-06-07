@@ -19,12 +19,12 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/profile">Profile</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="#">About</a>
             </li>
             <% if(isLoggedIn){%>
+              <li class="nav-item">
+                <a class="nav-link" href="/profile">Profile</a>
+              </li>
               <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
               </li>
@@ -47,28 +47,62 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-6">
-                <% if(event.invited.includes(user.email)){%>
-                  <p>Hello, <%=user.first%>! You have been invited to this event!</p>
+                <% if(user && event.invited.includes(user.email)){%>
+                  <p class="mb-1">Hello, <%=user.first%>! You have been invited to this event!</p>
                   <form action="/events/event/acceptInvite/<%=event._id%>?_method=PUT" method="POST" class="d-inline">
                     <button class="btn btn-success btn-sm">Accept Invite</button>
+                  </form>
+                  <form action="/events/event/maybeInvite/<%=event._id%>?_method=PUT" method="POST" class="d-inline">
+                    <button class="btn btn-primary btn-sm">Maybe Attending</button>
                   </form>
                   <form action="/events/event/declineInvite/<%=event._id%>?_method=PUT" method="POST" class="d-inline">
                     <button class="btn btn-danger btn-sm">Decline Invite</button>
                   </form>
+                <%} else if (user && event.public === true && !event.attendees.includes(user.email) && !event.maybe.includes(user.email)){%>
+                  <p class="mb-1">Hello, <%=user.first%>! This event is open the the public! Would you like to attend?</p>
+                  <form action="/events/event/acceptInvite/<%=event._id%>?_method=PUT" method="POST" class="d-inline">
+                    <button class="btn btn-success btn-sm">Attend</button>
+                  </form>
+                  <form action="/events/event/maybeInvite/<%=event._id%>?_method=PUT" method="POST" class="d-inline">
+                    <button class="btn btn-primary btn-sm">Maybe Attending</button>
+                  </form>
+                <%} else if (user && event.attendees.includes(user.email)){%>
+                  <p class="mb-1">Hello, <%=user.first%>! You are currently RSVPed to this event, would you like update your attendance status?</p>
+                  <form action="/events/event/maybeInvite/<%=event._id%>?_method=PUT" method="POST" class="d-inline">
+                    <button class="btn btn-success btn-sm">Maybe Attending</button>
+                  </form>
+                  <form action="/events/event/cancelAttendance/<%=event._id%>?_method=PUT" method="POST" class="d-inline">
+                    <button class="btn btn-danger btn-sm">No Longer Attending</button>
+                  </form>
+                <%} else if (user && event.maybe.includes(user.email)){%>
+                  <p>Hello, <%=user.first%>! You are currently marked as a maybe, would you like to update your RSVP?</p>
+                  <form action="/events/event/acceptInvite/<%=event._id%>?_method=PUT" method="POST" class="d-inline">
+                    <button class="btn btn-success btn-sm">Attend</button>
+                  </form>
+                  <form action="/events/event/cancelAttendance/<%=event._id%>?_method=PUT" method="POST" class="d-inline">
+                    <button class="btn btn-danger btn-sm">No Longer Attending</button>
+                  </form>
                 <%}%>
-                <h3><%=event.name%></h3>
+                <h3 class="mt-2"><%=event.name%></h3>
                 <img src="<%= event.image %>" alt="Event Photo" class="img-fluid rounded">
                 <p><%= event.desc %></p>
                 <p><%=event.date.toLocaleDateString(undefined, {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })%> at <%=event.date.toLocaleTimeString()%></p>
                 <% let address = event.address %>
+                <% if(address.address && address.zip){%>
                 <p>
                   <a href="https://www.google.com/maps/search/?api=1&query=<%=address.address.split(' ').join('%20')%>%2C%20<%=address.city.split(' ').join('%20')%>%2C%20<%=address.state%>%2C%20<%=address.zip%>" target="_blank" rel="nonreferrer noopener">
                     <%=address.address%>, <%= address.city %> <%= address.state %> <%=address.zip%>
                   </a>
                 </p>
+                <%} else {%>
+                <p>
+                  <%=address.address%> <%=address.city%> <%=address.state%> <%=address.zip%>
+                </p>
+                <%}%>
                 <p><%= event.attendees.length%> people are attending</p>
+                <p><%= event.maybe.length%> people are maybe going</p>
                 <p><%= event.invited.length %> people are invited</p>
-                <% if(user._id = event.hostId) {%>
+                <% if(user && user._id === event.hostId) {%>
                   <div class="container">
                     <form action="/events/event/changeDate/<%=event._id%>?_method=PUT" method="POST">
                       <label for="date">Change Date</label>
@@ -137,7 +171,7 @@
                 <button class="btn btn-sm btn-danger"><i class="fas fa-heart"></i></button>
               </form>
               
-              <%if(userId == user._id){%>
+              <%if(user && userId == user._id){%>
                 <form action="/events/event/deleteComment/<%=event._id%>/<%=commentId%>?_method=PUT" method="POST" class="d-inline">
                   <button class="btn btn-sm btn-primary"><i class="fas fa-trash"></i></button>
                 </form>

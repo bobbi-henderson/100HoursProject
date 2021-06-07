@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>100 Hours Project</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <script src="https://kit.fontawesome.com/6bab3c972e.js" crossorigin="anonymous"></script>
 </head>
 <body class="pb-5">
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 pb-0 pt-0">
-        <a class="navbar-brand" href="/"><img src="images/meetcomm.png" class="logo"></a>
+        <a class="navbar-brand" href="/"><img src="../../images/meetcomm.png" class="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -17,12 +19,9 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/about">About</a>
+              <a class="nav-link" href="/profile">Profile</a>
             </li>
             <% if(isLoggedIn){%>
-              <li class="nav-item">
-                <a href="/profile" class="nav-link">Profile</a>
-              </li>
               <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
               </li>
@@ -35,31 +34,26 @@
               </li>
             <%}%>
           </ul>
+
+
           <form action="/search" method="GET" class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search">
             <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
           </form>
         </div>
     </nav>
-    
+
     <img src="images/meetcommlarge.png" alt="">
     <h1>The place where people come together.</h1>
 
-    <h2>Popular Upcoming Events</h2>
+    <h2>About Meet Community</h2>
 
-    <% for(let i=0;i<events.length;i++){ %>
-      <% if(events[i].date.getTime() >= Date.now()){ %>
-        <div class="col-4">
-          <h3><%=events[i].name%></h3>
-          <img src="<%= events[i].image %>" alt="Event Photo" class="img-fluid rounded">
-          <form action="/events/event/<%=events[i]._id%>" class="d-inline">
-            <button class="btn btn-primary btn-sm mt-3" >See More</button>
-          </form>
-        </div>
-      <%}%>
-    <%}%>
-    
-    <script src="js/index.js"></script>
+    <p class="w-75 m-auto">
+        Meet Community was designed to help community organizers better manage their events. It aims to be a full service community organizing app
+        that facilitates communication with attendees before, during, and after events take place. 
+    </p>
+
+    <script src="../../js/index.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

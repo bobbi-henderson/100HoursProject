@@ -49,6 +49,7 @@
           <% if(event.date.getTime() >= Date.now()){ %>
             <div class="col-4">
               <h3><%=userEvents[i].name%></h3>
+              <p><%=event.date.toLocaleDateString(undefined, {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })%> at <%=event.date.toLocaleTimeString()%></p>
               <img src="<%= userEvents[i].image %>" alt="Event Photo" class="img-fluid rounded">
               <form action="/events/event/<%= userEvents[i]._id%>" class="d-inline">
                 <button class="btn btn-primary btn-sm mt-3" >See More</button>
@@ -64,6 +65,22 @@
 
 
     <h2 class="d-block">Attending</h2>
+    <div class="container">
+      <div class="row">
+        <% for(let i=0;i<attending.length;i++){ %>
+          <% let event = attending[i] %>
+          <% if(event.date.getTime() >= Date.now()){ %>
+            <div class="col-4">
+              <h3><%=event.name%></h3>
+              <p><%=event.date.toLocaleDateString(undefined, {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })%> at <%=event.date.toLocaleTimeString()%></p>
+              <img src="<%= event.image %>" alt="Event Photo" class="img-fluid rounded">
+              <form action="/events/event/<%= event._id%>" class="d-inline">
+                <button class="btn btn-primary btn-sm mt-3" >See More</button>
+              </form>
+            </div>
+          <%}%>
+        <%}%>
+      </div>
 
     <h2 class="d-block">Invited</h2>
 
@@ -75,6 +92,7 @@
           <% if(event.date.getTime() < Date.now()){ %>
             <div class="col-4">
               <h3><%=userEvents[i].name%></h3>
+              <p><%=event.date.toLocaleDateString(undefined, {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })%> at <%=event.date.toLocaleTimeString()%></p>
               <img src="<%= userEvents[i].image %>" alt="Event Photo" class="img-fluid rounded">
               <form action="/events/event/<%= userEvents[i]._id%>" class="d-inline">
                 <button class="btn btn-primary btn-sm mt-3" >See More</button>
