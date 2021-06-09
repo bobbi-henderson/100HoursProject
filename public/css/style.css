@@ -1,6 +1,7 @@
 body {
-    background-color: lightgray;
+    background-color: whitesmoke;
     text-align: center;
+    color: rgba(52, 59, 64);
 }
 
 .form-group {
@@ -14,4 +15,33 @@ body {
 .comment {
     border: 1px solid black;
     border-radius: 10px;
+}
+
+
+.jumbotron { 
+    background-image: url('../images/jumbotron.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment:fixed;
+    height: 500px;
+}
+
+.card {
+    border-radius: 15px;
+    background-color: rgba(52, 59, 64);
+    color: white;
+    border: 0;
+}
+
+.card img {
+    border-radius: 15px 15px 5px 5px;
+}
+
+@media screen and (max-width: 750px){
+    .jumbotron {
+        height: 300px;
+        background-size: 750px;
+        background-position: top center;
+    }
 }

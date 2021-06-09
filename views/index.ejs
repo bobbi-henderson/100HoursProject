@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="pb-5">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 pb-0 pt-0">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-0 pb-0 pt-0">
         <a class="navbar-brand" href="/"><img src="images/meetcomm.png" class="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -42,19 +42,27 @@
         </div>
     </nav>
     
-    <img src="images/meetcommlarge.png" alt="">
-    <h1>The place where people come together.</h1>
+    <div class="jumbotron jumbotron-fluid" >
+      <div class="container" id="jumbotron">
 
+      </div>
+    </div>
     <h2>Popular Upcoming Events</h2>
 
     <% for(let i=0;i<events.length;i++){ %>
-      <% if(events[i].date.getTime() >= Date.now()){ %>
+      <% let event = events[i] %>
+      <% if(event.date.getTime() >= Date.now()){ %>
         <div class="col-4">
-          <h3><%=events[i].name%></h3>
-          <img src="<%= events[i].image %>" alt="Event Photo" class="img-fluid rounded">
-          <form action="/events/event/<%=events[i]._id%>" class="d-inline">
-            <button class="btn btn-primary btn-sm mt-3" >See More</button>
-          </form>
+          <div class="card">
+            <img src="<%= event.image %>" alt="Event Photo" class="img-fluid">
+            <div class="card-body">
+              <h4 class="card-title"><%=events[i].name%></h3>
+              <p class="card-text pb-0 mb-0"><%=event.date.toLocaleDateString(undefined, {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })%> at <%=event.date.toLocaleTimeString()%></p>
+              <form action="/events/event/<%=event._id%>" class="d-inline">
+                <button class="btn btn-outline-secondary btn-sm mt-3" >See More</button>
+              </form>
+            </div>
+          </div>
         </div>
       <%}%>
     <%}%>
