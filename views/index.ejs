@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="pb-5">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-0 pb-0 pt-0">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-0 pb-0 pt-0">
         <a class="navbar-brand" href="/"><img src="images/meetcomm.png" class="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -59,7 +59,7 @@
               <h4 class="card-title"><%=events[i].name%></h3>
               <p class="card-text pb-0 mb-0"><%=event.date.toLocaleDateString(undefined, {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })%> at <%=event.date.toLocaleTimeString()%></p>
               <form action="/events/event/<%=event._id%>" class="d-inline">
-                <button class="btn btn-outline-secondary btn-sm mt-3" >See More</button>
+                <button class="btn btn-outline-light btn-sm mt-3" >See More</button>
               </form>
             </div>
           </div>

@@ -18,20 +18,12 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="#">Resources</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/login">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/signup">Sign Up</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/logout">Logout</a>
-            </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search">
@@ -42,7 +34,7 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-6">
+            <div class="col-11 col-lg-8">
                 <h1 class="">Sign up for a Meet Community Account</h1>
                 <div class="">
                     <% if (locals.messages.errors) { %>
@@ -53,7 +45,7 @@
                         <% }) %>
                     <% } %>
                 </div>
-                <form action="/signup" method="POST">
+                <form action="/signup" method="POST" id="signup" class="p-3 my-3">
                     <div class="form-row">
                         <div class="col form-group">
                             <label for="first">First Name</label>
@@ -80,7 +72,7 @@
                         <label for="confirmPass" class="">Confirm Password</label>
                         <input type="password" name="confirmPass" id="confirmPass" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-outline-light">Submit</button>  
                 </form>
                 <span class="">Already have an account? <a class="" href="/login">Sign in here</a></span>
             </div>

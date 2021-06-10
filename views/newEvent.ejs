@@ -17,14 +17,11 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="#">Resources</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="/about">About</a>
             </li>
             <% if(isLoggedIn){%>
-              <li class="nav-item">
-                <a href="/profile" class="nav-link">Welcome, <%=user.first%></a>
+              <li>
+                <a href="/profile" class="nav-link">Profile</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
@@ -49,9 +46,9 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-6">
+            <div class="col-11 col-lg-7">
                 <h1 class="">Start a New Event</h1>
-                <form action="/events/newEvent" enctype="multipart/form-data" method="POST">
+                <form action="/events/newEvent" enctype="multipart/form-data" method="POST" id="newEvent" class="p-3 my-3">
                     <div class="form-group">
                         <label for="name">Event Name</label>
                         <input type="text" name="name" id="name" class="form-control">
@@ -94,7 +91,7 @@
                         <label for="public" class="form-check-label">Yes</label>
                     </div>
                     <div></div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-outline-light mt-2">Submit</button>
                 </form>
             </div>
         </div>

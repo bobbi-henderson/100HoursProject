@@ -1,7 +1,15 @@
+nav {
+    background-color: #2F2FA2;
+}
+
+nav li a {
+    color: white;
+}
+
 body {
-    background-color: whitesmoke;
+    background-color: #2F2FA2;
     text-align: center;
-    color: rgba(52, 59, 64);
+    color: white;
 }
 
 .form-group {
@@ -9,7 +17,7 @@ body {
 }
 
 .logo {
-    height: auto;
+    height: 40px;
 }
 
 .comment {
@@ -29,13 +37,18 @@ body {
 
 .card {
     border-radius: 15px;
-    background-color: rgba(52, 59, 64);
+    background: linear-gradient(to top, #fb0639 0%, #f64c72 100%);
     color: white;
     border: 0;
 }
 
 .card img {
     border-radius: 15px 15px 5px 5px;
+}
+
+#login, #signup, #newEvent {
+    background: linear-gradient(to top, #fb0639 0%, #f64c72 100%);
+    border-radius: 15px;
 }
 
 @media screen and (max-width: 750px){

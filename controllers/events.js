@@ -4,7 +4,11 @@ const mailer = require('../middleware/nodeMailer')
 
 module.exports = {
     getNewEvent: (req,res)=>{
-        res.render('newEvent.ejs', {user: req.user, isLoggedIn: req.isAuthenticated()})
+        if(!req.user){
+            res.redirect('/')
+        } else {
+            res.render('newEvent.ejs', {user: req.user, isLoggedIn: req.isAuthenticated()})
+        }
     },
     postNewEvent: async (req,res)=>{
         try {

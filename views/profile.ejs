@@ -39,7 +39,7 @@
         </div>
     </nav>
     <h1>Welcome back, <%= user.first %></h1>
-    <a href="/events/newEvent" class="btn btn-primary">New Event <i class="fas fa-plus"></i></a>
+    <a href="/events/newEvent" class="btn btn-outline-light my-4">New Event <i class="fas fa-plus"></i></a>
 
     <h2>You're Events</h2>
     <div class="container">
@@ -54,7 +54,7 @@
                   <h4 class="card-title"><%=event.name%></h3>
                   <p class="card-text pb-0 mb-0"><%=event.date.toLocaleDateString(undefined, {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })%> at <%=event.date.toLocaleTimeString()%></p>
                   <form action="/events/event/<%=event._id%>" class="d-inline">
-                    <button class="btn btn-outline-secondary btn-sm mt-3" >See More</button>
+                    <button class="btn btn-outline-light btn-sm mt-3" >See More</button>
                   </form>
                 </div>
               </div>
@@ -78,7 +78,7 @@
                   <h4 class="card-title"><%=event.name%></h3>
                   <p class="card-text pb-0 mb-0"><%=event.date.toLocaleDateString(undefined, {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })%> at <%=event.date.toLocaleTimeString()%></p>
                   <form action="/events/event/<%=event._id%>" class="d-inline">
-                    <button class="btn btn-outline-secondary btn-sm mt-3" >See More</button>
+                    <button class="btn btn-outline-light btn-sm mt-3" >See More</button>
                   </form>
                 </div>
               </div>
@@ -102,7 +102,7 @@
                   <h4 class="card-title"><%=event.name%></h3>
                   <p class="card-text pb-0 mb-0"><%=event.date.toLocaleDateString(undefined, {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })%> at <%=event.date.toLocaleTimeString()%></p>
                   <form action="/events/event/<%=event._id%>" class="d-inline">
-                    <button class="btn btn-outline-secondary btn-sm mt-3" >See More</button>
+                    <button class="btn btn-outline-light btn-sm mt-3" >See More</button>
                   </form>
                 </div>
               </div>
