@@ -25,14 +25,19 @@ body {
     border-radius: 10px;
 }
 
+.jumbo-container {
+  margin: auto;
+  width: 100%;  
+}
 
 .jumbotron { 
     background-image: url('../images/jumbotron.png');
-    background-position: center center;
+    background-position: top center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment:fixed;
-    height: 500px;
+    height: 0;
+    padding-top: 50%;
 }
 
 .card {
@@ -51,10 +56,26 @@ body {
     border-radius: 15px;
 }
 
-@media screen and (max-width: 750px){
+@media screen and (max-width: 1215px){
+    .jumbotron {
+        background-size: 1215px;
+        background-position: top center;
+    }
+} 
+
+@media screen and (max-width: 815px){
     .jumbotron {
         height: 300px;
-        background-size: 750px;
+        background-size: 816px;
         background-position: top center;
     }
 }
+
+@media screen and (max-width: 400px) {
+    .jumbotron {
+        height: 300px;
+        background-size: 700px;
+        background-position: top center;
+    }
+}
+
