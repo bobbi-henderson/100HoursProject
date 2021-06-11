@@ -12,6 +12,10 @@ body {
     color: white;
 }
 
+h2 {
+    padding-bottom: .5em;
+}
+
 .form-group {
     text-align: start;
 }
@@ -41,19 +45,28 @@ body {
 }
 
 .card {
-    border-radius: 15px;
+    border-radius: 16px;
     background: linear-gradient(to top, #fb0639 0%, #f64c72 100%);
     color: white;
     border: 0;
+    margin-bottom: 1em;
 }
 
 .card img {
     border-radius: 15px 15px 5px 5px;
 }
 
-#login, #signup, #newEvent {
+#login, #signup, #newEvent, #eventInfo {
     background: linear-gradient(to top, #fb0639 0%, #f64c72 100%);
     border-radius: 15px;
+}
+
+#RSVP {
+    background-color: whitesmoke;
+    color: #2F2FA2;
+    padding-top: .25em;
+    padding-bottom: .25em;
+    border-radius: 10px;
 }
 
 @media screen and (max-width: 1215px){
