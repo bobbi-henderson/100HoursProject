@@ -69,6 +69,11 @@ h2 {
     border-radius: 10px;
 }
 
+#comments {
+    background: linear-gradient(to top, #5100ff 0%, #9b16ff 100%);
+    border-radius: 10px;
+}
+
 @media screen and (max-width: 1215px){
     .jumbotron {
         background-size: 1215px;
