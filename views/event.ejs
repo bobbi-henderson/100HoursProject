@@ -167,6 +167,7 @@
       <div class="row justify-content-center" >
         <div class="col col-sm-11 col-md-9 col-lg-7">
           <div id="comments" class="p-3">
+            <%if(user){%>
             <form action="/events/event/postComment/<%=event._id%>?_method=PUT" method="POST" class="pb-1">
               <div class="form-group mb-1">
                 <label for="content">New Comment</label>
@@ -174,6 +175,8 @@
               </div>
               <button class="btn btn-sm btn-outline-light">Submit</button>
             </form>
+            <%}%>
+            
             <%for(let i=0; i<event.comments.length; i++){%>
               <div class="d-flex flex-column align-items-start comment mb-2 p-2 text-left">
                 <p class="mb-0 comment-user"><%=event.comments[i].username%></p>
