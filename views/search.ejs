@@ -44,23 +44,52 @@
     
     <h1>Search Results</h1>
 
-    <% for(let i=0;i<events.length;i++){ %>
-      <% let event = events[i] %>
-        <% if(event.date.getTime() >= Date.now()){ %>
-          <div class="col col-sm-6 col-lg-4">
-            <div class="card">
-              <img src="<%= event.image %>" alt="Event Photo" class="img-fluid">
-              <div class="card-body">
-                <h4 class="card-title"><%=events[i].name%></h3>
-                <p class="card-text pb-0 mb-0"><%=event.date.toLocaleDateString(undefined, {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })%> at <%=event.date.toLocaleTimeString()%></p>
-                <form action="/events/event/<%=event._id%>" class="d-inline">
-                  <button class="btn btn-outline-light btn-sm mt-3" >See More</button>
-                </form>
+    <h2>Upcoming Events</h2>
+    <div class="container">
+      <div class="row">
+        <% for(let i=0;i<events.length;i++){ %>
+          <% let event = events[i] %>
+            <% if(event.date.getTime() >= Date.now()){ %>
+              <div class="col-xs-12 col-sm-10 col-md-6 col-lg-4">
+                <div class="card">
+                  <img src="<%= event.image %>" alt="Event Photo" class="img-fluid">
+                  <div class="card-body">
+                    <h4 class="card-title"><%=events[i].name%></h3>
+                    <p class="card-text pb-0 mb-0"><%=event.date.toLocaleDateString(undefined, {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })%> at <%=event.date.toLocaleTimeString()%></p>
+                    <form action="/events/event/<%=event._id%>" class="d-inline">
+                      <button class="btn btn-outline-light btn-sm mt-3" >See More</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            <%}%>
+        <%}%>
+      </div>
+    </div>
+
+
+    <h2 class="d-block">Past Events</h2>
+    <div class="container">
+      <div class="row justify-content-center">
+        <% for(let i=0;i<events.length;i++){ %>
+          <% let event = events[i] %>
+          <% if(event.date.getTime() < Date.now()){ %>
+            <div class="col-xs-12 col-sm-10 col-md-6 col-lg-4">
+              <div class="card">
+                <img src="<%= event.image %>" alt="Event Photo" class="img-fluid">
+                <div class="card-body">
+                  <h4 class="card-title"><%=event.name%></h3>
+                  <p class="card-text pb-0 mb-0"><%=event.date.toLocaleDateString(undefined, {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })%> at <%=event.date.toLocaleTimeString()%></p>
+                  <form action="/events/event/<%=event._id%>" class="d-inline">
+                    <button class="btn btn-outline-light btn-sm mt-3" >See More</button>
+                  </form>
+                </div>
               </div>
             </div>
-          </div>
+          <%}%>
         <%}%>
-    <%}%>
+      </div>
+    </div>
     
     <script src="js/index.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

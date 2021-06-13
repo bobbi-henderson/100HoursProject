@@ -1,13 +1,5 @@
-nav {
-    background-color: #2F2FA2;
-}
-
-nav li a {
-    color: white;
-}
-
 body {
-    background-color: #2F2FA2;
+    background-color: #2026b3;
     text-align: center;
     color: white;
 }
@@ -24,9 +16,28 @@ h2 {
     height: 40px;
 }
 
+.address-link {
+    color: black;
+}
+
+.dateChangeForm, .changeAddressForm, .addInvitesForm {
+    display: none;
+}
+
 .comment {
-    border: 1px solid black;
+    box-shadow: 3px 3px;
     border-radius: 10px;
+    color: #2F2FA2;
+    background-color: whitesmoke;
+}
+
+.comment-date {
+    font-size: x-small;
+}
+
+.comment-user, .comment-likes {
+    font-size: small;
+    margin-bottom: 1em;
 }
 
 .jumbo-container {
@@ -54,6 +65,7 @@ h2 {
 
 .card img {
     border-radius: 15px 15px 5px 5px;
+    height: 200px;
 }
 
 #login, #signup, #newEvent, #eventInfo {
@@ -74,6 +86,13 @@ h2 {
     border-radius: 10px;
 }
 
+.btn-group-xs > .btn, .btn-xs {
+    padding: .25rem .4rem;
+    font-size: .875rem;
+    line-height: .5;
+    border-radius: .2rem;
+  }
+
 @media screen and (max-width: 1215px){
     .jumbotron {
         background-size: 1215px;
@@ -86,6 +105,10 @@ h2 {
         height: 300px;
         background-size: 816px;
         background-position: top center;
+    }
+
+    .card img {
+        height: 175px;
     }
 }
 
